@@ -36,8 +36,7 @@ router.post('/login', async (req, res) => {
       }
     }
   } catch (err) {
-    res.send('user creation has problems') // preferred
-    // throw new Error('user creation has problems')
+    res.send('user creation has problems')
   }
 })
 

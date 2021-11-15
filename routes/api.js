@@ -8,7 +8,6 @@ const isAuthenticated = require('../middlewares/isAuthenticated')
 // get questions
 router.get('/', async (req, res) => {
   try {
-    // await Question.find({})
     res.json(await Question.find({}))
   } catch (err) {
     res.send('problems with getting questions')
