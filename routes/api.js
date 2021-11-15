@@ -15,32 +15,30 @@ router.get('/', async (req, res) => {
   }
 })
 
-//new question
+// new question
 router.post('/add', isAuthenticated, async (req, res) => {
   const { questionText } = req.body
 
   try {
     const author = req.session.username
-    await Question.create({ questionText, author: req.session.username}) 
+    await Question.create({ questionText, author: req.session.username })
     res.send('question created')
   } catch (err) {
     res.send('problems with creating a question')
   }
 })
 
-//add answer to question
+// add answer to question
 router.post('/answer', isAuthenticated, async (req, res) => {
   const { _id, answer } = req.body
 
   try {
-    const update = { answer: answer }
+    const update = { answer }
     await Question.findOneAndUpdate({ _id }, update)
     res.send('question answered')
   } catch (err) {
     res.send('problems with adding an answer')
   }
 })
-
-
 
 module.exports = router

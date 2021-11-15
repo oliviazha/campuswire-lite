@@ -11,20 +11,16 @@ const MONGO_URI = process.env.MONGODB_URI || 'mongodb+srv://oliviazha:*Oz254517@
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
 
-//middleware handling POST --> req.body
+// middleware handling POST --> req.body
 app.use(express.json())
-
-// app.get('/', (req, res) => {
-//   res.send('hello world')
-// })
 
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  maxAge: 100000 
+  maxAge: 100000,
 }))
 
 // can only access req.session within a POST request
@@ -35,7 +31,6 @@ app.post('/', (req, res) => {
     res.send('please log in')
   }
 })
-
 
 app.use('/account', UserRouter)
 app.use('/questions', QuestionRouter)

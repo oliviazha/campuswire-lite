@@ -1,8 +1,8 @@
 const isAuthenticated = (req, res, next) => {
   if (req.session.username !== '' && req.session.username) {
-      next();
+    next()
   } else {
-      next(new Error('user not authenticated'));
+    next(new Error('user not authenticated'))
   }
 }
 
