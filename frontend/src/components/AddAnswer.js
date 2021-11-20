@@ -6,8 +6,7 @@ const AddAnswer = ({ question }) => {
   const [answer, setAnswer] = useState('')
   const [answered, setAnswered] = useState(false)
 
-  const newAns = async e => {
-    e.preventDefault()
+  const newAns = async () => {
     const id = question._id
     const { data } = await axios.post('/questions/answer', { id, answer })
     // console.log(data)
@@ -30,8 +29,8 @@ const AddAnswer = ({ question }) => {
         <button
           type="button"
           id="submit"
-          onClick={e => {
-            newAns(e)
+          onClick={() => {
+            newAns()
             setAnswered(true)
           }}
         >
