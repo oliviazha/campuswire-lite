@@ -32,7 +32,7 @@ const Signup = () => {
       <br />
       <input onChange={e => setPassword(e.target.value)} />
       <br />
-      <button type="button" onClick={createUser}> Sign Up </button>
+      <button type="button" onClick={() => createUser}> Sign Up </button>
       <p>
         Already have an account?&nbsp;
         <Link to="/login">Log in here!</Link>

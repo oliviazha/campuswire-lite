@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  maxAge: 100000,
+  maxAge: 26 * 60 * 60 * 1000,
 }))
 
 // can only access req.session within a POST request
