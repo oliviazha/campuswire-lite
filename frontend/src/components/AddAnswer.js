@@ -10,12 +10,12 @@ const AddAnswer = ({ question }) => {
     e.preventDefault()
     const id = question._id
     const { data } = await axios.post('/questions/answer', { id, answer })
-    console.log(data)
-    // if (data === 'question answered') {
-    //   console.log('question answered')
-    // } else {
-    //   window.alert('error answering question')
-    // }
+    // console.log(data)
+    if (data === 'question answered') {
+      console.log('question answered')
+    } else {
+      window.alert('error answering question')
+    }
   }
 
   if (!answered) {

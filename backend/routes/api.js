@@ -33,10 +33,10 @@ router.post('/answer', isAuthenticated, async (req, res) => {
 
   try {
     const update = { answer }
-    const filter = { _id }
-    const q = await Question.findOneAndUpdate(filter, update, { new: true })
-    // res.send('question answered')
-    res.json(q)
+    // const filter = { _id }
+    const q = await Question.findOneAndUpdate({ _id }, update, { new: true })
+    res.send('question answered')
+    // res.json(q)
   } catch (err) {
     res.send('problems with adding an answer')
   }
