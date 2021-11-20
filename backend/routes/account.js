@@ -5,8 +5,17 @@ const router = express.Router()
 const User = require('../model/User')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
+// check if logged in
+router.post('/isloggedin', isAuthenticated, (req, res) => {
+  try {
+    res.send(req.session.username)
+  } catch (err) {
+    res.send('not logged in')
+  }
+})
+
 // signup (create user)
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', async (req, res) => {
   const { username, password } = req.body
 
   try {
@@ -18,9 +27,8 @@ router.post('/signup', async (req, res, next) => {
 })
 
 // login
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
   const { username, password } = req.body
-
   try {
     const user = await User.findOne({ username })
     if (!user) {
@@ -38,6 +46,18 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     res.send('user creation has problems')
   }
+
+  // User.findOne({ username }, (err, result) => {
+  //   if (err) {
+  //     next(err)
+  //   } else if (!result) {
+  //     next(new Error('Not an existing user'))
+  //   } else {
+  //     req.session.user = username
+  //     req.session.password = password
+  //     next()
+  //   }
+  // })
 })
 
 // logout
