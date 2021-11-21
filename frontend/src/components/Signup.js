@@ -19,9 +19,6 @@ const Signup = () => {
   return (
     <div className="signup">
       <h1>Sign Up</h1>
-      {/* <>
-        {data.map(user => <p> {user.username} </p>)}
-      </> */}
       Username:
       <br />
       <input onChange={e => setUsername(e.target.value)} />

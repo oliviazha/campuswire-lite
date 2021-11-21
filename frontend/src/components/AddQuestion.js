@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// functional component
-const AddQuestion = ({ currUser }) => {
+const AddQuestion = () => {
   const [question, changeQuestion] = useState('')
   const [isAddQ, setIsAddQ] = useState(false)
   const newQ = async () => {
     const { data } = await axios.post('/questions/add', { questionText: question })
-    if (data === 'question created') {
-      console.log('question created')
-    } else {
+    if (data !== 'question created') {
       window.alert('error creating question')
     }
   }

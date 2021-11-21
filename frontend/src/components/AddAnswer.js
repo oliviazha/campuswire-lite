@@ -29,7 +29,6 @@ const AddAnswer = ({ setCurrQ, question }) => {
           onClick={() => {
             newAns()
             setAnswered(true)
-            // setCurrQ(updatedQ)
           }}
         >
           Submit Answer

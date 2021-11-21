@@ -12,8 +12,7 @@ const App = () => {
 
   const checkLoggedin = async () => {
     try {
-      const { data } = await axios.post('/account/isloggedin') // GET request
-      // console.log(isLoggedIn)
+      const { data } = await axios.post('/account/isloggedin')
       if (data !== 'There was an error!') {
         setCurrUser(data)
         setIsLoggedIn(true)
@@ -64,7 +63,7 @@ const App = () => {
                 <button type="button" className="logout" onClick={() => logoutUser()}> Log out </button>
               </div>
             </div>
-            <AddQuestion currUser={currUser} />
+            <AddQuestion />
           </div>
         )}
         {!isLoggedIn && (
