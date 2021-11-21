@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// functional component
-const AddAnswer = ({ question }) => {
+const AddAnswer = ({ setCurrQ, question }) => {
   const [answer, setAnswer] = useState('')
   const [answered, setAnswered] = useState(false)
 
   const newAns = async () => {
-    const id = question._id
-    const { data } = await axios.post('/questions/answer', { id, answer })
-    // console.log(data)
-    if (data === 'question answered') {
-      console.log('question answered')
-    } else {
+    const { _id } = question
+    const { data } = await axios.post('/questions/answer', { _id, answer })
+    setCurrQ(data)
+    if (!data.answer) {
       window.alert('error answering question')
     }
   }
@@ -32,6 +29,7 @@ const AddAnswer = ({ question }) => {
           onClick={() => {
             newAns()
             setAnswered(true)
+            // setCurrQ(updatedQ)
           }}
         >
           Submit Answer

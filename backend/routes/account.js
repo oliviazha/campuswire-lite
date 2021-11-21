@@ -8,9 +8,9 @@ const isAuthenticated = require('../middlewares/isAuthenticated')
 // check if logged in
 router.post('/isloggedin', isAuthenticated, (req, res) => {
   try {
-    res.send(req.session.username)
+    res.status(200).send(req.session.username)
   } catch (err) {
-    res.send('not logged in')
+    res.status(200).send('not logged in')
   }
 })
 
@@ -22,12 +22,12 @@ router.post('/signup', async (req, res) => {
     await User.create({ username, password })
     res.send('user created')
   } catch (err) {
-    res.send('user sign up has problems')
+    res.status(200).send('user sign up has problems')
   }
 })
 
 // login
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
   const { username, password } = req.body
   try {
     const user = await User.findOne({ username })
@@ -44,20 +44,8 @@ router.post('/login', async (req, res, next) => {
       }
     }
   } catch (err) {
-    res.send('user creation has problems')
+    res.status(200).send('user creation has problems')
   }
-
-  // User.findOne({ username }, (err, result) => {
-  //   if (err) {
-  //     next(err)
-  //   } else if (!result) {
-  //     next(new Error('Not an existing user'))
-  //   } else {
-  //     req.session.user = username
-  //     req.session.password = password
-  //     next()
-  //   }
-  // })
 })
 
 // logout

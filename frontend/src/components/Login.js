@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [succeeded, setSucceeded] = useState(false)
   const navigate = useNavigate()
 
   const loginUser = async () => {
-    const { data } = await axios.post('/account/login', { username, password })
-    console.log('calling loginuser')
-    if (data === 'user logged in successfully') {
-      setSucceeded(true)
-      navigate('../')
-    } else {
+    try {
+      const { data } = await axios.post('/account/login', { username, password })
+      if (data === 'user logged in successfully') {
+        navigate('../')
+      } else {
+        window.alert('login error! try again')
+      }
+    } catch (err) {
       window.alert('login error! try again')
     }
   }
@@ -22,9 +23,6 @@ const Login = () => {
   return (
     <div className="login">
       <h1>Log In</h1>
-      {/* <>
-        {data.map(user => <p> {user.username} </p>)}
-      </> */}
       Username:
       <br />
       <input onChange={e => setUsername(e.target.value)} />
@@ -35,7 +33,7 @@ const Login = () => {
       <br />
       <button type="button" onClick={() => loginUser()}> Log In </button>
       <p>
-        Don't have an account?&nbsp;
+        Don&apos;t have an account?&nbsp;
         <Link to="/signup">Sign up!</Link>
       </p>
     </div>

@@ -3,7 +3,14 @@ import axios from 'axios'
 import AddAnswer from './AddAnswer'
 
 // functional component
-const Question = ({ question, isLoggedIn }) => {
+const Question = ({ setCurrQ, question, isLoggedIn }) => {
+
+  // console.log(qs.get(question.id))
+  // qs.map(q => (
+  //   if (q.id === question.id) {
+  //     const currQ = q
+  //   })
+  // )
   if (question.questionText) {
     return (
       <div>
@@ -19,7 +26,7 @@ const Question = ({ question, isLoggedIn }) => {
             Answer:&nbsp;
             {question.answer}
           </p>
-          {(!question.answer) && isLoggedIn && <AddAnswer question={question} />}
+          {(!question.answer) && isLoggedIn && <AddAnswer setCurrQ={setCurrQ} question={question} />}
         </div>
       </div>
     )

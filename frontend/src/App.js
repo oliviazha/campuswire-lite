@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Signup from './components/Signup'
-import Login from './components/Login'
-import AddAnswer from './components/AddAnswer'
 import AddQuestion from './components/AddQuestion'
 import Question from './components/Question'
 
 const App = () => {
-
   const [qs, setQs] = useState([])
   const [currUser, setCurrUser] = useState('')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currQ, setCurrQ] = useState('')
 
   const checkLoggedin = async () => {
-    // console.log('logged in?', isLoggedIn)
-    // console.log('user', currUser)
     try {
       const { data } = await axios.post('/account/isloggedin') // GET request
-      if (data) {
+      // console.log(isLoggedIn)
+      if (data !== 'There was an error!') {
         setCurrUser(data)
         setIsLoggedIn(true)
       } else {
@@ -27,15 +22,8 @@ const App = () => {
       }
     } catch (err) {
       setIsLoggedIn(false)
-      console.log('error checking if loggedin')
     }
   }
-
-  // useEffect(async () => {
-  //   const { data: questions } = await axios.get('/questions') // GET request
-  //   setQs(questions)
-  //   checkLoggedin()
-  // }, [])
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -51,12 +39,10 @@ const App = () => {
   }, [])
 
   const logoutUser = async () => {
-    console.log('in logoutUser')
     try {
       const { data } = await axios.post('/account/logout')
       if (data === 'user is logged out') {
         setIsLoggedIn(false)
-        console.log('logged out')
       }
     } catch (err) {
       window.alert('logout error! try again')
@@ -66,7 +52,6 @@ const App = () => {
   return (
     <>
       <div className="home">
-        {/* <AddQuestion /> */}
         {isLoggedIn && (
           <div id="logged-in">
             <div id="nav-bar">
@@ -104,7 +89,7 @@ const App = () => {
             ))}
           </div>
           <div className="column right">
-            <Question question={currQ} isLoggedIn={isLoggedIn} />
+            <Question setCurrQ={setCurrQ} question={currQ} isLoggedIn={isLoggedIn} />
           </div>
         </div>
       </div>

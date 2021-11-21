@@ -39,7 +39,7 @@ app.use('/questions', QuestionRouter)
 
 // error middleware
 app.use((err, req, res, next) => {
-  res.status(500).send('There was an error!')
+  res.status(200).send('There was an error!')
 })
 
 // set favicon
